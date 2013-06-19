@@ -1,4 +1,6 @@
 require "twitter"
+require "csv"
+require 'fileutils'
 
 Twitter.configure do |config|
   config.consumer_key = "f7Kkx1x1M1TcvBmgLALl1g"
@@ -10,9 +12,20 @@ end
 # result = Twitter.search("hi")
 
 
-Twitter.search("hi", :count => 3, :result_type => "recent").results.map do |status|
-  puts "#{status.from_user}: #{status.text}"
-end
+# Twitter.search("hi", :count => 3, :result_type => "recent").results.map do |status|
+#   puts "#{status.from_user}: #{status.text}"
+# end
 
 
 puts Twitter.search("hi", :count => 3, :result_type => "recent").results.inspect
+
+
+FileUtils.touch('file.csv')
+
+
+CSV.open("file.csv", "wb") do |csv|
+  csv << ["handle", "text", "url"]
+  csv << ["@food", "hello", "www.hood.com"]
+  csv << ["@food", "hello", "www.hood.com"]
+  csv << ["@food", "hello", "www.hood.com"]
+end
