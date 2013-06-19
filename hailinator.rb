@@ -22,10 +22,16 @@ puts Twitter.search("hi", :count => 3, :result_type => "recent").results.inspect
 
 FileUtils.touch('file.csv')
 
+#Hacked Code#
+# CSV.open("file.csv", "wb") do |csv|
+#   csv << ["handle", "text", "url"]
+#   csv << ["@food", "hello", "www.hood.com"]
+#   csv << ["@food", "hello", "www.hood.com"]
+#   csv << ["@food", "hello", "www.hood.com"]
+# end
 
-CSV.open("file.csv", "wb") do |csv|
-  csv << ["handle", "text", "url"]
-  csv << ["@food", "hello", "www.hood.com"]
-  csv << ["@food", "hello", "www.hood.com"]
-  csv << ["@food", "hello", "www.hood.com"]
+#Refactored Code#
+results = Twitter.search("hi", :count => 3, :result_type => "recent").results
+results.map do | status |
+	puts "#{status.from_user}: #{status.text}: user.url" #get inside each tweet object and get handle, text, url
 end
