@@ -6,3 +6,13 @@ Twitter.configure do |config|
   config.oauth_token = "14859518-xMT4AWraObBx4tbc7llsR47gQI0UO9oMymEaTBGO5"
   config.oauth_token_secret = "0dWJipCTBpaKPz1SH2ozTe6hFVz3eti7xuxs3Nw2ck"
 end
+
+# result = Twitter.search("hi")
+
+
+Twitter.search("hi", :count => 3, :result_type => "recent").results.map do |status|
+  puts "#{status.from_user}: #{status.text}"
+end
+
+
+puts Twitter.search("hi", :count => 3, :result_type => "recent").results.inspect
